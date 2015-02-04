@@ -1,0 +1,12 @@
+doctype
+html
+    head
+        title #{title}
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        h1 #{title}
+        ul
+            each tram in schedules
+                li
+                    h3 Route #{tram.RouteNo} - #{tram.Destination}
+                    zp Arriving #{tram.PredictedArrivalDateTime}
