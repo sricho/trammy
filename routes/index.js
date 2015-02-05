@@ -1,23 +1,21 @@
 var express = require('express');
 var router = express.Router();
-var webservice = require('../modules/web_service');
+var request = require('request');
 
+var SERVICE_URL = 'http://www.tramtracker.com/Controllers/';
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    webservice.getSchedules(req.cookies.guid, 1221, function(err, schedules){
-        res.render('index', { title: 'Trammy', schedules: schedules, errors: err });
-    });
+    res.render('index', { title: 'Trammy' });
 });
 
-router.get('/:stopid', function(req, res) {
-    var stopid = req.params.stopid;
-    if(req.params.stopid === undefined) { stopid = 1221; }
+router.get('/stop/:stopid/:routeno?/:lowfloor?', function(req, res) {
+    var stopid   = req.params.stopid   || 1221;
+    var routeno  = req.params.routeno  || 0;
+    var lowfloor = req.params.lowfloor || false;
 
-    webservice.getSchedules(req.cookies.guid, req.params.stopid, function(err, schedules){
-        res.render('index', { title: 'Trammy', schedules: schedules, errors: err });
-    });
+    request(SERVICE_URL + 'GetNextPredictionsForStop.ashx?stopNo='+stopid+'&routeNo='+routeno+'&isLowFloor='+lowfloor)
+        .pipe(res);
 });
-
 
 module.exports = router;
