@@ -1,27 +1,25 @@
-//This file is fucked.
-
 import AppDispatcher from '../dispatchers/app_dispatcher';
 import TramStopConstants from '../constants/tram_stop_constants';
 
 var EventEmitter = require('events').EventEmitter;
 const CHANGE_EVENT = 'change';
 
-
-var _tramStops = [];
-
-var _addTramStop = (tramStop) => {
-  _tramStops.push(tramStop);
-  console.log('adding to', _tramStops);
-}
-
-
 class TramStopStore extends EventEmitter {
+  constructor() {
+    this.tramstops = [];
+  }
+
+  addTramStop(tramStop) {
+    this.tramstops.push(tramStop);
+    console.log(`adding stop #${tramStop} to [${this.tramstops}]`);
+  }
+
   get(id) {
-    _tramStops[id] || null;
+    this.tramStops[id] || null;
   }
 
   getAll() {
-    _tramStops;
+    this.tramStops;
   }
 
   emitChange() {
@@ -36,10 +34,10 @@ AppDispatcher.register( (payload) => {
 
   switch(action.actionType) {
     case TramStopConstants.LOAD_STOP:
-      _loadTramStop(action.stop);
+      tramStopStore.loadTramStop(action.stop);
       break;
     case TramStopConstants.ADD_STOP:
-      _addTramStop(action.stop);
+      tramStopStore.addTramStop(action.stop);
       break;
   }
 
