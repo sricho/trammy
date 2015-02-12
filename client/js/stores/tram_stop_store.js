@@ -6,20 +6,20 @@ const CHANGE_EVENT = 'change';
 
 class TramStopStore extends EventEmitter {
   constructor() {
-    this.tramstops = [];
+    this.tramStops = [1551, 1221];
   }
 
   addTramStop(tramStop) {
-    this.tramstops.push(tramStop);
-    console.log(`adding stop #${tramStop} to [${this.tramstops}]`);
+    this.tramStops.push(tramStop);
+    console.log(`adding stop #${tramStop} to [${this.tramStops}]`);
   }
 
   get(id) {
-    this.tramStops[id] || null;
+    return this.tramStops[id] || null;
   }
 
   getAll() {
-    this.tramStops;
+    return this.tramStops;
   }
 
   emitChange() {
