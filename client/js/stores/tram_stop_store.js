@@ -1,17 +1,23 @@
 import AppDispatcher from '../dispatchers/app_dispatcher';
 import TramStopConstants from '../constants/tram_stop_constants';
+import TramStop from '../utils/tram_stop';
 
 var EventEmitter = require('events').EventEmitter;
 const CHANGE_EVENT = 'change';
 
 class TramStopStore extends EventEmitter {
   constructor() {
-    this.tramStops = [1551, 1221];
+    this.tramStops = [];
   }
 
-  addTramStop(tramStop) {
-    this.tramStops.push(tramStop);
-    console.log(`adding stop #${tramStop} to [${this.tramStops}]`);
+  addTramStop(stopId) {
+    var stop = new TramStop(stopId);
+    this.tramStops.push(stop);
+    console.log(`adding ${stop} to [${this.tramStops}]`);
+  }
+
+  loadTramStop(stopId, stopInfo) {
+    console.log('attempting to load', stopId, stopInfo);
   }
 
   get(id) {
@@ -34,7 +40,7 @@ AppDispatcher.register( (payload) => {
 
   switch(action.actionType) {
     case TramStopConstants.LOAD_STOP:
-      tramStopStore.loadTramStop(action.stop);
+      tramStopStore.loadTramStop(action.stopId, action.stop);
       break;
     case TramStopConstants.ADD_STOP:
       tramStopStore.addTramStop(action.stop);

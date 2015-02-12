@@ -14,7 +14,7 @@ const TramStopAdder = React.createClass({
   },
 
   onSubmitHandler(event) {
-    TramStopActions.addStop(this.state.body)
+    TramStopActions.addStop(this.state.body);
     this.setState({body: ''});
   },
 

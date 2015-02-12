@@ -18,4 +18,8 @@ router.get('/stop/:stopid/:routeno?/:lowfloor?', function(req, res) {
         .pipe(res);
 });
 
+router.get('/stop_information/:stopid/', function(req, res) {
+    request(SERVICE_URL + 'GetStopInformation.ashx?s=' + req.params.stopid).pipe(res);
+});
+
 module.exports = router;

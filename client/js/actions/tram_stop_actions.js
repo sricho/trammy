@@ -1,11 +1,18 @@
 import AppDispatcher from '../dispatchers/app_dispatcher';
 import TramStopConstants from '../constants/tram_stop_constants';
+import TramStopServiceApi from '../utils/tram_stop_service_api';
 
 class TramStopActions {
   loadStop(stopId) {
-    AppDispatcher.handleViewAction({
-      actionType: TramStopConstants.LOAD_STOP,
-      stop: stopId });
+    TramStopServiceApi.loadStop(stopId, (error, request) => {
+
+      AppDispatcher.handleViewAction({
+        actionType: TramStopConstants.LOAD_STOP,
+        stopId: stopId,
+        stop: request.ResponseObject
+      });
+
+    });
   }
 
   addStop(stopId) {
