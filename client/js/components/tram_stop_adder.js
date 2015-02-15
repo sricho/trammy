@@ -21,7 +21,7 @@ const TramStopAdder = React.createClass({
   render() {
     return (
       <div>
-        <input type="text" onChange={this.onChangeHandler} value={this.state.body} />
+        <input type="text" placeholder="1221" onChange={this.onChangeHandler} value={this.state.body} />
         <button onClick={ this.onSubmitHandler }>Add Stop</button>
       </div>
     );

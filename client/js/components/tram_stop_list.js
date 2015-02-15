@@ -28,10 +28,7 @@ var TramStopList = React.createClass({
     return (
       <div>
         <h1>Favorites</h1>
-        <small>See <a href="/stop/1211">/stop/1211/</a> for JSON response that will be used.</small>
-        <br /><br />
         <TramStopAdder />
-        <p><strong>Tram stop placeholders below:</strong></p>
         {stops}
       </div>
     )

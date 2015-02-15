@@ -10,14 +10,9 @@ class TramStopStore extends EventEmitter {
     this.tramStops = [];
   }
 
-  addTramStop(stopId) {
-    var stop = new TramStop(stopId);
+  addTramStop(stopId, stopInfo) {
+    var stop = new TramStop(stopId, stopInfo);
     this.tramStops.push(stop);
-    console.log(`adding ${stop} to [${this.tramStops}]`);
-  }
-
-  loadTramStop(stopId, stopInfo) {
-    console.log('attempting to load', stopId, stopInfo);
   }
 
   get(id) {
@@ -39,11 +34,14 @@ AppDispatcher.register( (payload) => {
   var action = payload.action;
 
   switch(action.actionType) {
-    case TramStopConstants.LOAD_STOP:
-      tramStopStore.loadTramStop(action.stopId, action.stop);
-      break;
     case TramStopConstants.ADD_STOP:
-      tramStopStore.addTramStop(action.stop);
+      var stopInfo = {};
+
+      if (action.stopInfo.ResponseObject) {
+        stopInfo = action.stopInfo.ResponseObject;
+      }
+
+      tramStopStore.addTramStop(action.stopId, stopInfo);
       break;
   }
 

@@ -14,7 +14,8 @@ var TramStop = React.createClass({
   render() {
     return (
       <div className="service-card">
-        Tram stop component for stop #{this.props.stop}
+        <h3>Stop {this.state.stop.flagStopNo} {this.state.stop.direction}</h3>
+        <p>{this.state.stop.stopName}</p>
       </div>
     );
   }

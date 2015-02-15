@@ -2,8 +2,7 @@ import request from 'superagent';
 
 class TramStopServiceApi {
   loadStop(stop, callback) {
-    request.get(`/stop_information/${stop.id}`, (error, result) => {
-      console.log(result.text)
+    request.get(`/stop_information/${stop}`, (error, result) => {
       callback(error, JSON.parse(result.text));
     });
   }
