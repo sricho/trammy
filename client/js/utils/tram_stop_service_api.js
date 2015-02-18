@@ -6,6 +6,12 @@ class TramStopServiceApi {
       callback(error, JSON.parse(result.text));
     });
   }
+
+  getTramPredictions(stop, callback) {
+    request.get(`/stop/${stop}`, (error, result) => {
+      callback(error, JSON.parse(result.text));
+    });
+  }
 }
 
 export default new TramStopServiceApi

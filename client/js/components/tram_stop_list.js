@@ -22,7 +22,7 @@ var TramStopList = React.createClass({
 
   render() {
     var stops = this.state.stops.map((stop) => {
-      return(<TramStop key={stop} stop={stop} />);
+      return(<TramStop key={stop.id} stop={stop} />);
     });
 
     return (
