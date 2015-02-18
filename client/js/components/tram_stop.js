@@ -17,8 +17,13 @@ var TramStop = React.createClass({
 
   componentWillMount() {
     TramStore.addListener('trams-changed', this._setTrams);
-
     TramActions.importTramsForStop(this.state.stop.id);
+  },
+
+  componentDidMount() {
+    setInterval(() => {
+      TramActions.importTramsForStop(this.state.stop.id);
+    }, 30000)
   },
 
   componentWillUnmount() {
